@@ -45,21 +45,25 @@ message SuccessResponse {
   bool success = 1;
 }
 
-message TriggerEmoteResponse { }
+message SetUiFocusRequest {
+  string element_id = 1;
+}
 
-message MovePlayerToResponse { }
+message CopyToClipboardRequest {
+  string text = 1;
+}
 
-message TeleportToResponse { }
+message EmptyResponse { }
 
 service RestrictedActionsService {
   // MovePlayerTo will move the player in a position relative to the current scene
-  rpc MovePlayerTo(MovePlayerToRequest) returns (MovePlayerToResponse) {}
+  rpc MovePlayerTo(MovePlayerToRequest) returns (EmptyResponse) {}
 
   // TeleportTo will move the user to the specified world LAND parcel coordinates
-  rpc TeleportTo(TeleportToRequest) returns (TeleportToResponse) {}
+  rpc TeleportTo(TeleportToRequest) returns (EmptyResponse) {}
 
   // TriggerEmote will trigger an emote in this current user
-  rpc TriggerEmote(TriggerEmoteRequest) returns (TriggerEmoteResponse) {}
+  rpc TriggerEmote(TriggerEmoteRequest) returns (EmptyResponse) {}
 
   // ChangeRealm prompts the user to change to a specific realm
   rpc ChangeRealm(ChangeRealmRequest) returns (SuccessResponse) {}
@@ -76,4 +80,8 @@ service RestrictedActionsService {
 
   // TriggerSceneEmote will trigger an scene emote file in this current user
   rpc TriggerSceneEmote(TriggerSceneEmoteRequest) returns (SuccessResponse) {}
+
+  rpc SetUiFocus(SetUiFocusRequest) returns (SuccessResponse) {}
+
+  rpc CopyToClipboard(CopyToClipboardRequest) returns (EmptyResponse) {}
 }
